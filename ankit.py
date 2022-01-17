@@ -81,7 +81,7 @@ async def start(event):
 @tgbot.on(
     events.NewMessage(incoming=True, pattern="/covid", func=lambda e: e.is_private)
 )
-async def covid(event):
+async def destroy(event):
     sudo = SUDOS.split(" ")
     if str(event.sender_id) in sudo:
         try:
