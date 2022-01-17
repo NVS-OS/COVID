@@ -23,7 +23,6 @@ BOT_TOKEN = config("BOT_TOKEN", default=None)
 REDIS_URI = config("REDIS_URI", default=None)
 REDIS_PASS = config("REDIS_PASS", default=None)
 SUDOS = config("SUDOS", default=None)
-APIS = config("APIS", default=None)
 
 tgbot = TelegramClient("ANKIT", APP_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
@@ -39,10 +38,16 @@ try:
 except BaseException:
     pass
 
-apis = APIS.split(":")
-
-SEARCH_ENGINE_IDS = ["d99e58572df67b77a", "c1b78ad46b86b5213"]
-
+dc = random.randrange(1, 3)
+if dc == 1:
+    API_KEY = "AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU"
+if dc == 2:
+    API_KEY = "AIzaSyBF0zxLlYlPMp9xwMQqVKCQRq8DgdrLXsg"
+if dc == 3:
+    API_KEY = "AIzaSyDdOKnwnPwVIQ_lbH5sYE4FoXjAKIQV0DQ"
+if dc == 4:
+    API_KEY = "AIzaSyC2BAHB0MVs9q_vxTAIzbUB4VKug3cptT4"
+SEARCH_ENGINE_ID = "d99e58572df67b77a"
 
 print("Successfully deployed!")
 print(f"Your Bot is now running! 🥳🥳🥳")
