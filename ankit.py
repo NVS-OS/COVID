@@ -39,7 +39,7 @@ try:
 except BaseException:
     pass
 
-apis = APIS.split("d99e58572df67b77a")
+apis = APIS.split(":")
 
 SEARCH_ENGINE_IDS = ["d99e58572df67b77a", "c1b78ad46b86b5213"]
 
