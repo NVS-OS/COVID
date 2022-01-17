@@ -1,0 +1,33 @@
+{
+    "name": "Covid Special",
+    "description": "A Simple Telegram Bot To Scrap Answer From Toppr And Branly,Made With Love By ©ANKIT™",
+    "logo": "https://telegra.ph/file/5c61dd2bfd9c2b5477802.jpg",
+    "keywords": [
+        "telegram",
+        "telethon",
+        "telegram-bot",
+        "ankit"
+    ],
+    "repository": "https://github.com/NVS-OS/COVID",
+    "website": "https://github.com/NVS-OS",
+    "success_url": "https://github.com/NVS-OS",
+    "env": {
+        "API_HASH": {
+            "description": "You API HASH from my.telegram.org",
+            "value": "4d5ff4db45a7e931930d0c923a7fb295"
+        },
+        "APP_ID": {
+            "description": "You API ID from my.telegram.org",
+            "value": "14627413"
+        },
+        "BOT_TOKEN": {
+            "description": "Bot token, get it from @BotFather.",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ]
+}
