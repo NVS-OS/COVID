@@ -1,5 +1,5 @@
 # Idea By Ankit
-# Made By ©NVS-OS™
+# Made By Ankit
 # Thanks To Google😂😂😂
 
 import io
@@ -51,7 +51,7 @@ SEARCH_ENGINE_ID = "d99e58572df67b77a"
 
 print("Successfully deployed!")
 print(f"Your Bot is now running! 🥳🥳🥳")
-print("Enjoy! Do Follow https://github.com/NVS-OS🥺👉👈")
+print("Enjoy! Follow https://github.com/NVS-OS 🥺👉👈")
 
 
 @tgbot.on(
@@ -81,12 +81,12 @@ async def start(event):
 @tgbot.on(
     events.NewMessage(incoming=True, pattern="/covid", func=lambda e: e.is_private)
 )
-async def destroy(event):
+async def covid(event):
     sudo = SUDOS.split(" ")
     if str(event.sender_id) in sudo:
         try:
             ud.delete("USERS")
-            await event.reply("Covid DataBase successfully!")
+            await event.reply("Covid Positive DataBase successfully!")
         except:
             await event.reply(traceback.print_exc(file=sys.stdout))
 
@@ -99,12 +99,7 @@ async def users(e):
     y = x.split(" ")
     users_list = "List Of Total Users In Bot. \n\n"
     for xx in y:
-        try:
-            fname = (await tgbot.get_entity(int(xx))).first_name
-        except ValueError:
-            fname = "User"
-        name = f"[{fname}](tg://user?id={xx})"
-        users_list += f"=> Name: {name}| ID: {xx}\n"
+        users_list += f"=> Name: {name}ID: {xx}\n"
     sudo = SUDOS.split(" ")
     if str(e.sender_id) in sudo:
         if len(users_list) < 4096:
@@ -137,60 +132,57 @@ async def add(event):
 
 @tgbot.on(events.InlineQuery(pattern=r"(.*)"))
 async def inline_id_handler(event: events.InlineQuery.Event):
-    API_KEY = random.choice(apis)
-    SEARCH_ENGINE_ID = random.choice(SEARCH_ENGINE_IDS)
     query = event.text
-    try:
+    if event.query.user_id:
         x = ud.get("USERS")
         if x:
             y = x.split(" ")
-            for xx in y:
-                if str(event.query.user_id) not in y:
-                    ud.set("USERS", x + " " + str(event.query.user_id))
-                else:
-                    pass
+            if str(event.sender_id) not in y:
+                ud.set("USERS", x + " " + str(event.sender_id))
+            else:
+                pass
         else:
             ud.set("USERS", str(SUDOS))
 
+        piggi = 1
         padhai = []
+        start = (piggi - 1) * 3 + 1
+
+        programmingerror = f"https://www.googleapis.com/customsearch/v1?key={API_KEY}&cx={SEARCH_ENGINE_ID}&q={query}&start={start}"
+        coronabro = requests.get(programmingerror).json()
+        search_items = coronabro.get("items")
 
         if query:
-            programmingerror = f"https://customsearch.googleapis.com/customsearch/v1?q={query}&cx={SEARCH_ENGINE_ID}&start=1&key={API_KEY}"
-            coronabro = requests.get(programmingerror).json()
-            search_items = coronabro.get("items")
-            if search_items is not None:
-                for search_item in search_items:
-                    title = search_item.get("title")
-                    # Idea By Ankit
-                    # Made By ©NVS-OS™
-                    # Thanks To Google😂😂😂# https://www.googleapis.com/customsearch/v1?key=AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU&cx=d99e58572df67b77a&q=vector
-                    ANIE_00 = search_item.get("link")
-                    kotlin_xd = search_item.get("snippet")
-                    # Idea By Ankit
-                    # Made By ©NVS-OS™
-                    # Thanks To Google😂😂😂
-                    toppers = f"{title}\n\nAnswer in Short:\n\n{kotlin_xd}"
-                    padho = f"{title}"
-                    padhai.append(
-                        await event.builder.article(
-                            title=padho,
-                            description=f"{kotlin_xd}",  # Idea By Ankit
-                            # Made By ©ANKIT™
-                            # Thanks To Google😂😂😂
-                            text=toppers,
-                            buttons=[
-                                [Button.url("Answer", f"{ANIE_00}")],
-                                [
-                                    Button.switch_inline(
-                                        "Search Again", query=" ", same_peer=True
-                                    )
-                                ],
+            for i, search_item in enumerate(search_items, start=1):
+                title = search_item.get("title")
+                # Idea By ANKIT
+                # Made By ANKIT
+                # Thanks To Google😂😂😂# https://www.googleapis.com/customsearch/v1?key=AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU&cx=d99e58572df67b77a&q=vector
+                nvs_00 = search_item.get("link")
+                anie_xd = search_item.get("snippet")
+                # Idea By ANKIT
+                # Made By ANKIT
+                # Thanks To Google😂😂😂
+                toppers = f"{title}\n\nAnswer in Short:\n\n{anie_xd}"
+                padho = f"{title}"
+                padhai.append(
+                    await event.builder.article(
+                        title=padho,
+                        description=f"{anie_xd}",  # Idea By ANKIT
+                        # Made By ANKIT
+                        # Thanks To Google😂😂😂
+                        text=toppers,
+                        buttons=[
+                            [Button.url("Answer", f"{nvs_00}")],
+                            [
+                                Button.switch_inline(
+                                    "Search Again", query=" ", same_peer=True
+                                )
                             ],
-                        )
+                        ],
                     )
-                await event.answer(ankit)
-            else:
-                print(coronabro)
+                )
+            await event.answer([ankit])
         else:
             ankit.append(
                 await event.builder.article(
@@ -207,8 +199,6 @@ async def inline_id_handler(event: events.InlineQuery.Event):
                 )
             )
             await event.answer(ankit)
-    except:
-        traceback.print_exc(file=sys.stdout)
 
 
 try:
